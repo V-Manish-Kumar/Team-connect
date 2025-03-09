@@ -19,7 +19,7 @@ app = Flask(__name__)
 
 app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = 'Manish_23'
+app.config['MYSQL_PASSWORD'] = 'Your_Password'
 app.config['MYSQL_DB'] = 'flask_login'
 app.config['UPLOAD_FOLDER'] = 'file_uploads'
 app.config['SECRET_KEY'] = secrets.token_hex(16)
@@ -491,7 +491,7 @@ def disconnect():
 
 CORS(app)
 
-genai.configure(api_key="AIzaSyA9j3Yc5mWQdiPKLreGn0AwA35gH3HEgeA")
+genai.configure(api_key="Your_gemini_key")
 
 generation_config = {
     "temperature": 1,

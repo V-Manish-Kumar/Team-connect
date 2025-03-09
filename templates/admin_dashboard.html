@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='images/team_connect_logo.JPG') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .nav-brand a {
+            text-decoration: none;
+        }
+
+        /* Modal styles */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .modal-content {
+            background-color: #fff;
+            margin: 10% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 90%;
+            max-width: 800px;
+            border-radius: 10px;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard-container">
+        <nav class="dashboard-nav">
+            <div class="nav-brand">
+                <a class="MV3Tnb" href="{{ url_for('admin_dashboard') }}">
+                    <i class="fas fa-cube"></i>
+                    <span>Dashboard</span>
+                </a>
+            </div>
+            <div class="nav-user">
+                <!-- Add modal trigger to the calendar icon -->
+                <a href="javascript:void(0)" id="openModal" class="calendar-link">
+                    <i class="fas fa-calendar"></i>
+                </a>
+                <span>Welcome, Admin!</span>
+                <a href="{{ url_for('logout') }}" class="logout-btn">
+                    <i class="fas fa-sign-out-alt"></i>
+                    Logout
+                </a>
+            </div>
+        </nav>
+        <div class="dashboard-content">
+            <div class="welcome-card">
+                <div class="welcome-icon">
+                    <i class="fas fa-user-circle"></i>
+                </div>
+                <h1>Welcome to Admin Dashboard</h1>
+            </div>
+            <div class="stat-card">
+                <i class='fas fa-user'></i>
+                <h3>Manage Users</h3>
+                <p>User Management</p>
+                <br><br>
+                <a href="{{ url_for('manage_users') }}">
+                    <button type="button" class="btn btn-link">Manage Users</button>
+                </a>
+            </div>
+            <br>
+            <div class="stat-card">
+                <i class='fas fa-user'></i>
+                <h3>Log Page</h3>
+                <p>View Error Logs</p>
+                <br><br>
+                <a href="{{ url_for('error_logs') }}">
+                    <button type="button" class="btn btn-link">Error Logs</button>
+                </a>
+            </div>
+        
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div id="calendarModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <iframe src="https://calendar.google.com/calendar/embed?height=600&wkst=1&ctz=Asia%2FKolkata&showPrint=0&showTabs=0&src=M2RiZGIxMmJmYTllYzJjNTYzMzdhMDNmZmU0Mjc2OWI1NjQ4OGQwODdmYzcyOWViNTY4ZTVmOTUzODI2YWZiOUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=YWRkcmVzc2Jvb2sjY29udGFjdHNAZ3JvdXAudi5jYWxlbmRhci5nb29nbGUuY29t&src=ZW4uaW5kaWFuI2hvbGlkYXlAZ3JvdXAudi5jYWxlbmRhci5nb29nbGUuY29t&color=%23F09300&color=%2333B679&color=%230B8043" style="border-width:0" width="750" height="600" frameborder="0" scrolling="no"></iframe>
+        </div>
+    </div>
+
+    <script>
+        // Get modal, button, and close elements
+        const modal = document.getElementById('calendarModal');
+        const openModal = document.getElementById('openModal');
+        const closeModal = document.querySelector('.close');
+
+        // Open the modal
+        openModal.onclick = function() {
+            modal.style.display = 'block';
+        };
+
+        // Close the modal when "X" is clicked
+        closeModal.onclick = function() {
+            modal.style.display = 'none';
+        };
+
+        // Close the modal when clicking outside the modal content
+        window.onclick = function(event) {
+            if (event.target === modal) {
+                modal.style.display = 'none';
+            }
+        };
+    </script>
+</body>
+</html>

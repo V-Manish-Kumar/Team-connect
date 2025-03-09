@@ -1,0 +1,74 @@
+<!-- templates/error_logs.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Error Logs</title>
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='images/team_connect_logo.JPG') }}">
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .stack-trace {
+            max-height: 100px;
+            overflow-y: auto;
+            font-size: 0.8em;
+            white-space: pre-wrap;
+        }
+    </style>
+</head>
+<body>
+    <h1>Error Logs</h1>
+    
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="alert alert-{{ category }}">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    <a href="{{ url_for('admin_dashboard') }}">Back to Dashboard</a>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Timestamp</th>
+                <th>Error Message</th>
+                <th>Endpoint</th>
+                <th>Admin ID</th>
+                <th>Stack Trace</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for log in error_logs %}
+                <tr>
+                    <td>{{ log.id }}</td>
+                    <td>{{ log.timestamp }}</td>
+                    <td>{{ log.error_message }}</td>
+                    <td>{{ log.endpoint }}</td>
+                    <td>{{ log.admin_id or 'N/A' }}</td>
+                    <td>
+                        <div class="stack-trace">{{ log.stack_trace }}</div>
+                    </td>
+                </tr>
+            {% endfor %}
+            {% if not error_logs %}
+                <tr>
+                    <td colspan="6">No error logs found</td>
+                </tr>
+            {% endif %}
+        </tbody>
+    </table>
+</body>
+</html>
